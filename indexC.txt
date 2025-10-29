@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application de Gestion de Fabrication des Émulsions de Bitumes</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        input { width: 100%; box-sizing: border-box; }
+        .alert { color: red; }
+        .ok { color: green; }
+        button { padding: 10px; margin: 5px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Application de Gestion de Fabrication des Émulsions de Bitumes</h1>
+
+    <h2>1. Module de Fabrication : Dosages et Coûts</h2>
+    <p>Note : Modifiez les valeurs dans les champs pour recalculer automatiquement les coûts et prix de revient.</p>
+    <button onclick="recalculerTout()">Recalculer Tout</button>
+    <table id="fabrication-table">
+        <thead>
+            <tr>
+                <th>Grade</th>
+                <th>Ingrédient</th>
+                <th>Taux (KG/T)</th>
+                <th>Prix HT (MAD/T)</th>
+                <th>Coût (MAD/T)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- EAR 65% -->
+            <tr><td rowspan="4">EAR 65%</td><td>ÉMULSIONS 70/100</td><td><input type="number" value="617.00" id="taux-ear65-emulsions" onchange="calculerCout('ear65', 'emulsions')"></td><td><input type="number" value="6900" id="prix-ear65-emulsions" onchange="calculerCout('ear65', 'emulsions')"></td><td id="cout-ear65-emulsions">4257</td></tr>
+            <tr><td>FLUXANT</td><td><input type="number" value="13.00" id="taux-ear65-fluxant" onchange="calculerCout('ear65', 'fluxant')"></td><td><input type="number" value="12400" id="prix-ear65-fluxant" onchange="calculerCout('ear65', 'fluxant')"></td><td id="cout-ear65-fluxant">161</td></tr>
+            <tr><td>ACIDE</td><td><input type="number" value="1.50" id="taux-ear65-acide" onchange="calculerCout('ear65', 'acide')"></td><td><input type="number" value="2400" id="prix-ear65-acide" onchange="calculerCout('ear65', 'acide')"></td><td id="cout-ear65-acide">4</td></tr>
+            <tr><td>AMINE</td><td><input type="number" value="2.00" id="taux-ear65-amine" onchange="calculerCout('ear65', 'amine')"></td><td><input type="number" value="61412" id="prix-ear65-amine" onchange="calculerCout('ear65', 'amine')"></td><td id="cout-ear65-amine">123</td></tr>
+            <tr><td colspan="4"><strong>Prix de Revient Total</strong></td><td id="revient-ear65">4545</td></tr>
+
+            <!-- EAE 66% -->
+            <tr><td rowspan="4">EAE 66%</td><td>ÉMULSIONS 70/100</td><td><input type="number" value="488.00" id="taux-eae66-emulsions" onchange="calculerCout('eae66', 'emulsions')"></td><td><input type="number" value="6900" id="prix-eae66-emulsions" onchange="calculerCout('eae66', 'emulsions')"></td><td id="cout-eae66-emulsions">3367</td></tr>
+            <tr><td>FLUXANT</td><td><input type="number" value="162.00" id="taux-eae66-fluxant" onchange="calculerCout('eae66', 'fluxant')"></td><td><input type="number" value="12400" id="prix-eae66-fluxant" onchange="calculerCout('eae66', 'fluxant')"></td><td id="cout-eae66-fluxant">2009</td></tr>
+            <tr><td>ACIDE</td><td><input type="number" value="6.00" id="taux-eae66-acide" onchange="calculerCout('eae66', 'acide')"></td><td><input type="number" value="2400" id="prix-eae66-acide" onchange="calculerCout('eae66', 'acide')"></td><td id="cout-eae66-acide">14</td></tr>
+            <tr><td>AMINE</td><td><input type="number" value="3.50" id="taux-eae66-amine" onchange="calculerCout('eae66', 'amine')"></td><td><input type="number" value="61412" id="prix-eae66-amine" onchange="calculerCout('eae66', 'amine')"></td><td id="cout-eae66-amine">215</td></tr>
+            <tr><td colspan="4"><strong>Prix de Revient Total</strong></td><td id="revient-eae66">5605</td></tr>
+
+            <!-- EAI 55% -->
+            <tr><td rowspan="4">EAI 55%</td><td>ÉMULSIONS 70/100</td><td><input type="number" value="477.00" id="taux-eai55-emulsions" onchange="calculerCout('eai55', 'emulsions')"></td><td><input type="number" value="6900" id="prix-eai55-emulsions" onchange="calculerCout('eai55', 'emulsions')"></td><td id="cout-eai55-emulsions">3291</td></tr>
+            <tr><td>FLUXANT</td><td><input type="number" value="53.00" id="taux-eai55-fluxant" onchange="calculerCout('eai55', 'fluxant')"></td><td><input type="number" value="12400" id="prix-eai55-fluxant" onchange="calculerCout('eai55', 'fluxant')"></td><td id="cout-eai55-fluxant">657</td></tr>
+            <tr><td>ACIDE</td><td><input type="number" value="5.90" id="taux-eai55-acide" onchange="calculerCout('eai55', 'acide')"></td><td><input type="number" value="2400" id="prix-eai55-acide" onchange="calculerCout('eai55', 'acide')"></td><td id="cout-eai55-acide">14</td></tr>
+            <tr><td>AMINE</td><td><input type="number" value="2.50" id="taux-eai55-amine" onchange="calculerCout('eai55', 'amine')"></td><td><input type="number" value="61412" id="prix-eai55-amine" onchange="calculerCout('eai55', 'amine')"></td><td id="cout-eai55-amine">154</td></tr>
+            <tr><td colspan="4"><strong>Prix de Revient Total</strong></td><td id="revient-eai55">4116</td></tr>
+
+            <!-- ECF60 -->
+            <tr><td rowspan="8">ECF60</td><td>ÉMULSIONS 70/100</td><td><input type="number" value="592.00" id="taux-ecf60-emulsions" onchange="calculerCout('ecf60', 'emulsions')"></td><td><input type="number" value="6900" id="prix-ecf60-emulsions" onchange="calculerCout('ecf60', 'emulsions')"></td><td id="cout-ecf60-emulsions">4085</td></tr>
+            <tr><td>FLUXANT</td><td><input type="number" value="6.00" id="taux-ecf60-fluxant" onchange="calculerCout('ecf60', 'fluxant')"></td><td><input type="number" value="12400" id="prix-ecf60-fluxant" onchange="calculerCout('ecf60', 'fluxant')"></td><td id="cout-ecf60-fluxant">74</td></tr>
+            <tr><td>ACIDE</td><td><input type="number" value="12.00" id="taux-ecf60-acide" onchange="calculerCout('ecf60', 'acide')"></td><td><input type="number" value="2400" id="prix-ecf60-acide" onchange="calculerCout('ecf60', 'acide')"></td><td id="cout-ecf60-acide">29</td></tr>
+            <tr><td>AMINE</td><td><input type="number" value="2.00" id="taux-ecf60-amine" onchange="calculerCout('ecf60', 'amine')"></td><td><input type="number" value="61412" id="prix-ecf60-amine" onchange="calculerCout('ecf60', 'amine')"></td><td id="cout-ecf60-amine">123</td></tr>
+            <tr><td>LATEX</td><td><input type="number" value="20.00" id="taux-ecf60-latex" onchange="calculerCout('ecf60', 'latex')"></td><td><input type="number" value="32000" id="prix-ecf60-latex" onchange="calculerCout('ecf60', 'latex')"></td><td id="cout-ecf60-latex">640</td></tr>
+            <tr><td>PTA</td><td><input type="number" value="1.50" id="taux-ecf60-pta" onchange="calculerCout('ecf60', 'pta')"></td><td><input type="number" value="81000" id="prix-ecf60-pta" onchange="calculerCout('ecf60', 'pta')"></td><td id="cout-ecf60-pta">122</td></tr>
+            <tr><td>MDC</td><td><input type="number" value="12.00" id="taux-ecf60-mdc" onchange="calculerCout('ecf60', 'mdc')"></td><td><input type="number" value="75000" id="prix-ecf60-mdc" onchange="calculerCout('ecf60', 'mdc')"></td><td id="cout-ecf60-mdc">900</td></tr>
+            <tr><td>YC</td><td><input type="number" value="1.50" id="taux-ecf60-yc" onchange="calculerCout('ecf60', 'yc')"></td><td><input type="number" value="75000" id="prix-ecf60-yc" onchange="calculerCout('ecf60', 'yc')"></td><td id="cout-ecf60-yc">113</td></tr>
+            <tr><td colspan="4"><strong>Prix de Revient Total</strong></td><td id="revient-ecf60">6086</td></tr>
+
+            <!-- ECR69% MODIFIEE -->
+            <tr><td rowspan="5">ECR69% MODIFIEE</td><td>ÉMULSIONS 70/100</td><td><input type="number" value="666.00" id="taux-ecr69-emulsions" onchange="calculerCout('ecr69', 'emulsions')"></td><td><input type="number" value="6900" id="prix-ecr69-emulsions" onchange="calculerCout('ecr69', 'emulsions')"></td><td id="cout-ecr69-emulsions">4595</td></tr>
+            <tr><td>FLUXANT</td><td><input type="number" value="21.00" id="taux-ecr69-fluxant" onchange="calculerCout('ecr69', 'fluxant')"></td><td><input type="number" value="12400" id="prix-ecr69-fluxant" onchange="calculerCout('ecr69', 'fluxant')"></td><td id="cout-ecr69-fluxant">260</td></tr>
+            <tr><td>ACIDE</td><td><input type="number" value="1.80" id="taux-ecr69-acide" onchange="calculerCout('ecr69', 'acide')"></td><td><input type="number" value="2400" id="prix-ecr69-acide" onchange="calculerCout('ecr69', 'acide')"></td><td id="cout-ecr69-acide">4</td></tr>
+            <tr><td>AMINE</td><td><input type="number" value="2.90" id="taux-ecr69-amine" onchange="calculerCout('ecr69', 'amine')"></td><td><input type="number" value="61412" id="prix-ecr69-amine" onchange="calculerCout('ecr69', 'amine')"></td><td id="cout-ecr69-amine">178</td></tr>
+            <tr><td>LATEX</td><td><input type="number" value="30.00" id="taux-ecr69-latex" onchange="calculerCout('ecr69', 'latex')"></td><td><input type="number" value="32000" id="prix-ecr69-latex" onchange="calculerCout('ecr69', 'latex')"></td><td id="cout-ecr69-latex">960</td></tr>
+            <tr><td colspan="4"><strong>Prix de Revient Total</strong></td><td id="revient-ecr69">5997</td></tr>
+
+            <!-- Emul pour Flash-col -->
+            <tr><td rowspan="4">Emul pour Flash-col</td><td>ÉMULSIONS 70/100</td><td><input type="number" value="502.00" id="taux-flashcol-emulsions" onchange="calculerCout('flashcol', 'emulsions')"></td><td><input type="number" value="6900" id="prix-flashcol-emulsions" onchange="calculerCout('flashcol', 'emulsions')"></td><td id="cout-flashcol-emulsions">3464</td></tr>
+            <tr><td>FLUXANT</td><td><input type="number" value="89.00" id="taux-flashcol-fluxant" onchange="calculerCout('flashcol', 'fluxant')"></td><td><input type="number" value="12400" id="prix-flashcol-fluxant" onchange="calculerCout('flashcol', 'fluxant')"></td><td id="cout-flashcol-fluxant">1104</td></tr>
+            <tr><td>ACIDE</td><td><input type="number" value="3.20" id="taux-flashcol-acide" onchange="calculerCout('flashcol', 'acide')"></td><td><input type="number" value="2400" id="prix-flashcol-acide" onchange="calculerCout('flashcol', 'acide')"></td><td id="cout-flashcol-acide">8</td></tr>
+            <tr><td>SL</td><td><input type="number" value="3.80" id="taux-flashcol-sl" onchange="calculerCout('flashcol', 'sl')"></td><td><input type="number" value="55300" id="prix-flashcol-sl" onchange="calculerCout('flashcol', 'sl')"></td><td id="cout-flashcol-sl">210</td></tr>
+            <tr><td colspan="4"><strong>Prix de Revient Total</strong></td><td id="revient-flashcol">4786</td></tr>
+
+            <!-- COLFLEX N -->
+            <tr><td rowspan="4">COLFLEX N</td><td>BITUMES MODIFIES 35/50</td><td><input type="number" value="0.98" id="taux-colflexn-bitumes" onchange="calculerCout('colflexn', 'bitumes')"></td><td><input type="number" value="6700" id="prix-colflexn-bitumes" onchange="calculerCout('colflexn', 'bitumes')"></td><td id="cout-colflexn-bitumes">6533</td></tr>
+            <tr><td>SBS</td><td><input type="number" value="0.03" id="taux-colflexn-sbs" onchange="calculerCout('colflexn', 'sbs')"></td><td><input type="number" value="23100" id="prix-colflexn-sbs" onchange="calculerCout('colflexn', 'sbs')"></td><td id="cout-colflexn-sbs">578</td></tr>
+            <tr><td>SOUFRE</td><td><input type="number" value="0.00" id="taux-colflexn-soufre" onchange="calculerCout('colflexn', 'soufre')
