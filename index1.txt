@@ -1,0 +1,13 @@
+BP 80/100: 617kg × 1T × 6,900 DH/T ÷ 1000 = 4,257.30 DH
+FLUXANT: 13kg × 1T × 12,400 DH/T ÷ 1000 = 161.20 DH
+AMINE: 2kg × 1T × 15,000 DH/T ÷ 1000 = 30.00 DH
+ACIDE: 1.5kg × 1T × 8,000 DH/T ÷ 1000 = 12.00 DH
+
+COÛT MATIÈRES TOTAL: 4,460.50 DH
++ Main d'œuvre: 150 DH
++ Énergie: 80 DH  
++ Frais généraux: 120 DH
+COÛT TOTAL: 4,810.50 DH
+
+PRIX VENTE: 6,200 DH
+MARGE: 1,389.50 DH (22.4%)
